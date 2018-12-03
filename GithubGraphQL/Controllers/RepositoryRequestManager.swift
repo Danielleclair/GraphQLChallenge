@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 protocol RepositoryFetchResultDelegate: class
 {
@@ -22,7 +23,7 @@ class RepositoryRequestManager
     
     private struct Constants
     {
-        static let BatchSize = 10
+        static let BatchSize = 20
         static let QueryText = "graphql"
     }
     
@@ -57,6 +58,4 @@ class RepositoryRequestManager
             }
         }
     }
-    
-
 }

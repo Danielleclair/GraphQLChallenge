@@ -14,11 +14,13 @@ class RepositoryTableViewController: UITableViewController, RepositoryFetchResul
     var repositoryRequestManager: RepositoryRequestManager!
     var activityIndicator: UIActivityIndicatorView?
     var repositoryList: [RepositoryDetails] = []
+    var avatarImages: [String : UIImage] = [:]
     var fetchingNextPage: Bool = false
     
     override func viewDidLoad() {
         repositoryRequestManager = RepositoryRequestManager()
         repositoryRequestManager.delegate = self
+        showActivityIndicator()
         repositoryRequestManager.FetchNextBatch()
     }
     
@@ -27,7 +29,13 @@ class RepositoryTableViewController: UITableViewController, RepositoryFetchResul
         let cell = tableView.dequeueReusableCell(withIdentifier: RepositoryInfoCell.CellID) as? RepositoryInfoCell
         let repo = repositoryList[indexPath.row]
         
-        cell!.Configure(withRepoName: repo.name, userName: repo.owner.login, starCount: repo.stargazers.totalCount, avatarImageURL: repo.owner.avatarUrl)
+        if let avatarImage = avatarImages[repo.owner.avatarUrl] {
+            cell!.Configure(withRepoName: repo.name, userName: repo.owner.login, starCount: repo.stargazers.totalCount, avatarImage: avatarImage)
+        } else {
+            cell!.Configure(withRepoName: repo.name, userName: repo.owner.login, starCount: repo.stargazers.totalCount, avatarImageURL: repo.owner.avatarUrl) { [weak self] avatarImage in
+                    self?.avatarImages[repo.owner.avatarUrl] = avatarImage
+                }
+        }
         
         return cell!
     }
@@ -46,8 +54,10 @@ class RepositoryTableViewController: UITableViewController, RepositoryFetchResul
             createActivityIndicator()
         }
         
-        activityIndicator!.startAnimating()
-        activityIndicator!.isHidden = false
+        DispatchQueue.main.async {
+            self.activityIndicator!.startAnimating()
+            self.activityIndicator!.isHidden = false
+        }
     }
     
     private func hideActivityIndicator() {
@@ -56,30 +66,34 @@ class RepositoryTableViewController: UITableViewController, RepositoryFetchResul
             createActivityIndicator()
         }
         
-        activityIndicator!.isHidden = true
-        activityIndicator!.stopAnimating()
+        DispatchQueue.main.async {
+            self.activityIndicator!.isHidden = true
+            self.activityIndicator!.stopAnimating()
+        }
     }
     
     private func createActivityIndicator() {
-        activityIndicator = UIActivityIndicatorView()
+        activityIndicator = UIActivityIndicatorView(style: .gray)
         activityIndicator!.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(activityIndicator!)
         
         NSLayoutConstraint.activate([
             activityIndicator!.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-            activityIndicator!.centerYAnchor.constraint(equalTo: self.view.centerYAnchor)
+            activityIndicator!.centerYAnchor.constraint(equalTo: self.view.centerYAnchor),
         ])
     }
     
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if !fetchingNextPage && scrollView.contentOffset.y >= scrollView.contentSize.height / 2 {
+        if !fetchingNextPage && scrollView.contentOffset.y >= scrollView.contentSize.height - self.view.frame.height {
             fetchingNextPage = true
+            showActivityIndicator()
             repositoryRequestManager.FetchNextBatch()
         }
     }
     
     func didFetchResults(repositories: [RepositoryDetails]) {
         
-        fetchingNextPage = false
+        hideActivityIndicator()
         var insertIndicies: [IndexPath] = []
         
         for index in 0..<repositories.count {
@@ -89,9 +103,8 @@ class RepositoryTableViewController: UITableViewController, RepositoryFetchResul
         self.repositoryList += repositories
         
         DispatchQueue.main.async {
-            self.tableView.beginUpdates()
-            self.tableView.insertRows(at: insertIndicies, with: .fade)
-            self.tableView.endUpdates()
+            self.tableView.reloadData()
+            self.fetchingNextPage = false
         }
     }
 }

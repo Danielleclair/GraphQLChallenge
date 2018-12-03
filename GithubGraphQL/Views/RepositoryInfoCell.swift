@@ -21,14 +21,23 @@ class RepositoryInfoCell: UITableViewCell
     
     @IBOutlet weak var RepositoryStarCount: UILabel!
     
-    public func Configure(withRepoName repositoryName: String, userName: String, starCount: Int, avatarImageURL: String)
+    public func Configure(withRepoName repositoryName: String, userName: String, starCount: Int, avatarImageURL: String, completion: @escaping (UIImage) -> ())
+    {
+        if let url = URL(string: avatarImageURL) {
+            UserAvatarImage.SetImage(fromURL: url, completion: completion)
+        }
+        
+        Configure(withRepoName: repositoryName, userName: userName, starCount: starCount)
+    }
+    
+    public func Configure(withRepoName repositoryName: String, userName: String, starCount: Int, avatarImage: UIImage? = nil)
     {
         RepositoryName.text = repositoryName
         UserName.text = userName
         RepositoryStarCount.text = "\(starCount) Stars"
         
-        if let url = URL(string: avatarImageURL) {
-            UserAvatarImage.SetImage(fromURL: url)
+        if let avatarImage = avatarImage {
+            UserAvatarImage.image = avatarImage
         }
     }
     

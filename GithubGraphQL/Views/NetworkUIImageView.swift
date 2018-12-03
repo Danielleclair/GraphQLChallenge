@@ -15,7 +15,7 @@ class NetworkUIImageView: UIImageView
 {
     var task: URLSessionDataTask?
     
-    public func SetImage(fromURL url: URL) {
+    public func SetImage(fromURL url: URL, completion: @escaping (UIImage) -> ()) {
         let urlSession = URLSession.shared
         let urlRequest = URLRequest(url: url)
         
@@ -25,7 +25,10 @@ class NetworkUIImageView: UIImageView
             }
             
             DispatchQueue.main.async {
-                self?.image = UIImage(data: data)
+                if let image = UIImage(data: data) {
+                    self?.image = image
+                   completion(image)
+                }
             }
         }
         
