@@ -165,7 +165,6 @@
 		D9A10F9E216C4AFD007998EC /* GithubGraphQL */ = {
 			isa = PBXGroup;
 			children = (
-				F1BB75F021B38EE8000A8E54 /* Models */,
 				F1BB75ED21B38E8F000A8E54 /* Controllers */,
 				F1790EC121B349D5003C350D /* Views */,
 				D9A10F9F216C4AFD007998EC /* AppDelegate.swift */,
@@ -254,13 +253,6 @@
 				F1BB75F321B4A9FE000A8E54 /* RepositoryRequestManager.swift */,
 			);
 			path = Controllers;
-			sourceTree = "<group>";
-		};
-		F1BB75F021B38EE8000A8E54 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

@@ -21,14 +21,22 @@ class RepositoryInfoCell: UITableViewCell
     
     @IBOutlet weak var RepositoryStarCount: UILabel!
     
-    public func Configure(withRepoName repositoryName: String, userName: String, starCount: Int, avatarImage: UIImage? = nil)
+    public func Configure(withRepoName repositoryName: String, userName: String, starCount: Int, avatarImageURL: String)
     {
         RepositoryName.text = repositoryName
         UserName.text = userName
         RepositoryStarCount.text = "\(starCount) Stars"
         
-        if let avatarImage = avatarImage {
-            UserAvatarImage.image = avatarImage
+        if let url = URL(string: avatarImageURL) {
+            UserAvatarImage.SetImage(fromURL: url)
         }
+    }
+    
+    public override func prepareForReuse() {
+        RepositoryName.text = nil
+        UserName.text = nil
+        RepositoryStarCount.text = nil
+        UserAvatarImage.image = nil
+        UserAvatarImage.task?.cancel()
     }
 }

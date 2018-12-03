@@ -12,12 +12,14 @@ import UIKit
 //A subclass of UIImageView that handles the asychronous fetching
 //of an image from a URL
 class NetworkUIImageView: UIImageView
-{    
+{
+    var task: URLSessionDataTask?
+    
     public func SetImage(fromURL url: URL) {
         let urlSession = URLSession.shared
         let urlRequest = URLRequest(url: url)
         
-        let task = urlSession.dataTask(with: urlRequest) { [weak self] data, response, error in
+        task = urlSession.dataTask(with: urlRequest) { [weak self] data, response, error in
             guard let data = data, error == nil else {
                 return
             }
@@ -27,6 +29,6 @@ class NetworkUIImageView: UIImageView
             }
         }
         
-        task.resume()
+        task!.resume()
     }
 }
