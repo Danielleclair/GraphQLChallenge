@@ -27,6 +27,10 @@
 		D9A10FF4216D93B8007998EC /* RepositoriesGraphQLRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9A10FF3216D93B8007998EC /* RepositoriesGraphQLRequest.swift */; };
 		D9C8E126216DB958002A64FC /* schema.json in Resources */ = {isa = PBXBuildFile; fileRef = D9C8E125216DB958002A64FC /* schema.json */; };
 		D9C8E128216DBA11002A64FC /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9C8E127216DBA11002A64FC /* API.swift */; };
+		F1790EC521B34CA7003C350D /* RepositoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1790EC421B34CA7003C350D /* RepositoryTableViewController.swift */; };
+		F1790EC721B38A82003C350D /* RepositoryInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1790EC621B38A82003C350D /* RepositoryInfoCell.swift */; };
+		F1BB75F221B484B3000A8E54 /* NetworkUIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1BB75F121B484B3000A8E54 /* NetworkUIImageView.swift */; };
+		F1BB75F421B4A9FE000A8E54 /* RepositoryRequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1BB75F321B4A9FE000A8E54 /* RepositoryRequestManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,6 +83,10 @@
 		D9C8E125216DB958002A64FC /* schema.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = schema.json; sourceTree = "<group>"; };
 		D9C8E127216DBA11002A64FC /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		DDD86783CFC22C8C8CDE00EE /* Pods-GithubGraphQLUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GithubGraphQLUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GithubGraphQLUITests/Pods-GithubGraphQLUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		F1790EC421B34CA7003C350D /* RepositoryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryTableViewController.swift; sourceTree = "<group>"; };
+		F1790EC621B38A82003C350D /* RepositoryInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryInfoCell.swift; sourceTree = "<group>"; };
+		F1BB75F121B484B3000A8E54 /* NetworkUIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkUIImageView.swift; sourceTree = "<group>"; };
+		F1BB75F321B4A9FE000A8E54 /* RepositoryRequestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryRequestManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -157,6 +165,9 @@
 		D9A10F9E216C4AFD007998EC /* GithubGraphQL */ = {
 			isa = PBXGroup;
 			children = (
+				F1BB75F021B38EE8000A8E54 /* Models */,
+				F1BB75ED21B38E8F000A8E54 /* Controllers */,
+				F1790EC121B349D5003C350D /* Views */,
 				D9A10F9F216C4AFD007998EC /* AppDelegate.swift */,
 				D9A10FA6216C4AFD007998EC /* Assets.xcassets */,
 				D9A10FAB216C4AFD007998EC /* Info.plist */,
@@ -225,6 +236,31 @@
 				D9A10FF3216D93B8007998EC /* RepositoriesGraphQLRequest.swift */,
 			);
 			path = Repository;
+			sourceTree = "<group>";
+		};
+		F1790EC121B349D5003C350D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				F1790EC421B34CA7003C350D /* RepositoryTableViewController.swift */,
+				F1790EC621B38A82003C350D /* RepositoryInfoCell.swift */,
+				F1BB75F121B484B3000A8E54 /* NetworkUIImageView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		F1BB75ED21B38E8F000A8E54 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				F1BB75F321B4A9FE000A8E54 /* RepositoryRequestManager.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		F1BB75F021B38EE8000A8E54 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -462,10 +498,14 @@
 				D9A10FA2216C4AFD007998EC /* ViewController.swift in Sources */,
 				D9A10FE8216C77CD007998EC /* GraphQLManager.swift in Sources */,
 				D9A10FF4216D93B8007998EC /* RepositoriesGraphQLRequest.swift in Sources */,
+				F1790EC721B38A82003C350D /* RepositoryInfoCell.swift in Sources */,
 				D9A10FEA216C77CD007998EC /* GraphQLAuthHTTPNetworkTransport.swift in Sources */,
+				F1BB75F221B484B3000A8E54 /* NetworkUIImageView.swift in Sources */,
+				F1BB75F421B4A9FE000A8E54 /* RepositoryRequestManager.swift in Sources */,
 				D9C8E128216DBA11002A64FC /* API.swift in Sources */,
 				D9A10FF2216D7501007998EC /* GraphQLResult.swift in Sources */,
 				D9A10FF0216C7805007998EC /* RepositoriesGraphQLClient.swift in Sources */,
+				F1790EC521B34CA7003C350D /* RepositoryTableViewController.swift in Sources */,
 				D9A10FE9216C77CD007998EC /* GraphQLClientProtocol.swift in Sources */,
 				D9A10FA0216C4AFD007998EC /* AppDelegate.swift in Sources */,
 			);
